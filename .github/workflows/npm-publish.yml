@@ -1,0 +1,37 @@
+# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
+# For more information see: https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
+
+name: npm-publish
+
+on:
+  push:
+    branches: ['*']
+
+  release:
+    types: [created]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+  
+      - name: Install pnpm
+        run: curl -fsSL https://gist.githubusercontent.com/moander/94dca738d0b5b8acacbf898348f7d98a/raw/e209ffa62697a06a40470aaabd20304eb00753fb/pnpm-install.sh | bash -
+
+      - name: Detect .node-version
+        run: curl -fsSL https://gist.githubusercontent.com/moander/94dca738d0b5b8acacbf898348f7d98a/raw/e209ffa62697a06a40470aaabd20304eb00753fb/node-version.sh | bash -
+
+      - run: pnpm -g env use ${{ env.NODE_VERSION }}
+ 
+      - run: pnpm -g i typescript
+ 
+      - run: pnpm i
+ 
+      - run: pnpm build
+
+      - run: pnpm test
+ 
+      # - run: pnpm publish
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{secrets.npm_token}}

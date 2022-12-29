@@ -1,0 +1,23 @@
+{
+  "name": "@olibm/bindqs",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "repository": "olibm/bindqs",
+  "scripts": {
+    "build": "tsc",
+    "test": "node . && exit 0"
+  },
+  "files": [
+    "index.js",
+    "index.d.ts"
+  ],
+  "keywords": [],
+  "author": "moander",
+  "license": "ISC",
+  "peerDependencies": {
+    "vue": "^3.2.45",
+    "vue-router": "^4.1.6"
+  }
+}
